@@ -5,10 +5,10 @@ void mainImage( out vec4 fragColor,  in vec2 fragCoord )
     // parameter slope is from 0 to 1 (if 0.5 then 45 degrees)
     
     //parameter shift is from 0 to 1 (if 0.5 the deviding line goes through a corner)
-    //k={-1;+1} (if k=1 then the deviding line goes through bottom left corner)
-    //          (if k=-1 then the deviding line goes through top left corner)
+    //k={true;false} (if k=true then the deviding line goes through bottom left corner)
+    //          (if k=false then the deviding line goes through top left corner)
    
-float slope = 0.5;// 
+float slope = 0.5;
 float B=iResolution.y;
 float A=iResolution.x;
 bool k=false;//k={true;false}
