@@ -1,0 +1,29 @@
+void mainImage( out vec4 fragColor,  in vec2 fragCoord )
+
+
+{
+    // parameter slope is from 0 to 1 (if 0.5 then 45 degrees)
+    
+    //parameter shift is from 0 to 1 (if 0.5 the deviding line goes through a corner)
+    //k={-1;+1} (if k=1 then the deviding line goes through bottom left corner)
+    //          (if k=-1 then the deviding line goes through top left corner)
+   
+float slope = 0.5;// 
+float B=iResolution.y;
+float A=iResolution.x;
+bool k=false;//k={true;false}
+float shift=0.5 ;
+float C=0.0;
+float col=0.0;
+vec2 uv = fragCoord.xy/iResolution.xy;
+if (k==true)
+{C=-0.67 * (A+B) * abs(shift) + 0.67 * (2.*B-A) * abs(shift - 0.5)+ 0.67 * (A+B) * abs(shift-1.);
+col = -(C * cos(1.57*slope) +sin(1.57*slope)*iResolution.x*uv.x - cos(1.57*slope)*iResolution.y*uv.y);}
+else 
+{C=0.5*(A+3.*B)*abs(shift)+(A-B)*abs(shift-0.5)+0.5*(B-A)*abs(shift-1.);
+col = C * cos(1.57*slope) -sin(1.57*slope)*iResolution.x*uv.x - cos(1.57*slope)*iResolution.y*uv.y;}
+      
+    if (col > 0.0 ) fragColor=texture(iChannel1,uv);
+    else if 
+    (col < 0.0)     fragColor = texture(iChannel0,uv);
+}
